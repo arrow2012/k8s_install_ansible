@@ -8,7 +8,6 @@ from ansible.parsing.dataloader import DataLoader
 from ansible.vars.manager import VariableManager
 from ansible.inventory.manager import InventoryManager
 
-from inventory.inventory import MyInventory
 from ansible.playbook.play import Play
 from ansible.executor.task_queue_manager import TaskQueueManager
 from ansible.plugins.callback import CallbackBase
@@ -16,6 +15,7 @@ from ansible import context
 import ansible.constants as C
 
 from task import task
+from inventory import inventory
 
 class ResultCallback(CallbackBase):
     """A sample callback plugin used for performing an action as results come in
@@ -49,7 +49,9 @@ with open('inventory/hosts.json','r',encoding='utf8') as f:
     json_data = json.load(f)
     print('这是文件中的json数据：',json_data)
 
-inventory = MyInventory(loader=loader,sources=json_data)
+inv = inventory.MyInventory()
+
+inventory = inv(loader=loader,sources=json_data)
 # create inventory, use path to host config file as source or inventory in a comma separated string
 inventory = InventoryManager(loader=loader, sources='localhost,')
 
