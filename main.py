@@ -14,8 +14,8 @@ from ansible.plugins.callback import CallbackBase
 from ansible import context
 import ansible.constants as C
 
-from task import task
-from inventory import inventory
+from task.task import *
+from inventory.inventory import *
 
 class ResultCallback(CallbackBase):
     """A sample callback plugin used for performing an action as results come in
@@ -49,7 +49,7 @@ with open('inventory/hosts.json','r',encoding='utf8') as f:
     json_data = json.load(f)
     print('这是文件中的json数据：',json_data)
 
-inventory = inventory.MyInventory(loader=loader,sources=json_data)
+inventory = MyInventory(loader=loader,sources=json_data)
 # create inventory, use path to host config file as source or inventory in a comma separated string
 inventory = InventoryManager(loader=loader, sources='localhost,')
 
@@ -57,7 +57,7 @@ inventory = InventoryManager(loader=loader, sources='localhost,')
 variable_manager = VariableManager(loader=loader, inventory=inventory)
 
 
-t = task.Task()
+t = Task()
 
 # create data structure that represents our play, including tasks, this is basically what our YAML loader does internally.
 play_source = [
