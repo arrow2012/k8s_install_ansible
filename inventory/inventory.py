@@ -19,6 +19,8 @@ class MyInventory(InventoryManager):
         self._subset = None
         self._sources = sources
 
+        print(type(self._sources))
+
         # caches
         self._hosts_patterns_cache = {}  # resolved full patterns
         self._pattern_cache = {}  # resolved individual patterns
