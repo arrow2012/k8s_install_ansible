@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #!coding:utf-8
 
-class Task:
+class Task():
     def install_ntp(self):
         return dict(
             action=dict(module='yum', name='ntp',state= 'present'), register='shell_out',name='安装ntp'
