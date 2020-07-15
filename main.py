@@ -51,7 +51,7 @@ with open('inventory/hosts.json','r',encoding='utf8') as f:
 
 inventory = MyInventory(loader=loader,sources=json_data)
 # create inventory, use path to host config file as source or inventory in a comma separated string
-inventory = InventoryManager(loader=loader, sources='localhost,')
+# inventory = InventoryManager(loader=loader, sources='localhost,')
 
 # variable manager takes care of merging all the different sources to give you a unified view of variables available in each context
 variable_manager = VariableManager(loader=loader, inventory=inventory)

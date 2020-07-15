@@ -10,7 +10,6 @@ class MyInventory(InventoryManager):
     """
     def __init__(self, loader, sources=None):
         # super(MyInventory, self).__init__(loader,sources=None)
-
         # base objects
         self._loader = loader
         self._inventory = InventoryData()
