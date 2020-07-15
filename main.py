@@ -49,9 +49,7 @@ with open('inventory/hosts.json','r',encoding='utf8') as f:
     json_data = json.load(f)
     print('这是文件中的json数据：',json_data)
 
-inv = inventory.MyInventory()
-
-inventory = inv(loader=loader,sources=json_data)
+inventory = inventory.MyInventory(loader=loader,sources=json_data)
 # create inventory, use path to host config file as source or inventory in a comma separated string
 inventory = InventoryManager(loader=loader, sources='localhost,')
 
