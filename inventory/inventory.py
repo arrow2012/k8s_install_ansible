@@ -60,7 +60,7 @@ class MyInventory(InventoryManager):
         elif isinstance(self._sources, dict):
             self.hostid_list=[]
 
-            for groupname, hosts_and_vars in self._sources.iteritems():
+            for groupname, hosts_and_vars in self._sources:
                 self.my_add_group(groupname,hosts_and_vars.get("hosts"), hosts_and_vars.get("vars"))
             self._inventory.reconcile_inventory()
         else:
