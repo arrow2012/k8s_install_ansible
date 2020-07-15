@@ -1,0 +1,16 @@
+{
+    "master": {
+        "hosts": [
+            {
+                "inventory_hostname": "k8s-master-test01",
+                "ansible_host": "192.168.120.93",
+                "hostname": "k8s-master-test01",
+                "ansible_port": "22",
+                "nodename":"192.168.120.93",
+                "clusterName":"etcd-001"
+            }
+        ],
+        "vars": {
+        }
+    }
+}

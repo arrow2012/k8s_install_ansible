@@ -7,6 +7,8 @@ from ansible.module_utils.common.collections import ImmutableDict
 from ansible.parsing.dataloader import DataLoader
 from ansible.vars.manager import VariableManager
 from ansible.inventory.manager import InventoryManager
+
+from inventory.inventory import MyInventory
 from ansible.playbook.play import Play
 from ansible.executor.task_queue_manager import TaskQueueManager
 from ansible.plugins.callback import CallbackBase
@@ -42,7 +44,13 @@ passwords = dict(vault_pass='secret')
 # Instantiate our ResultCallback for handling results as they come in. Ansible expects this to be one of its main display outlets
 results_callback = ResultCallback()
 
-# create inventory, use path to host config file as source or hosts in a comma separated string
+
+with open('inventory/hosts.json','r',encoding='utf8') as f:
+    json_data = json.load(f)
+    print('这是文件中的json数据：',json_data)
+
+inventory = MyInventory(loader=loader,sources=json_data)
+# create inventory, use path to host config file as source or inventory in a comma separated string
 inventory = InventoryManager(loader=loader, sources='localhost,')
 
 # variable manager takes care of merging all the different sources to give you a unified view of variables available in each context
@@ -55,22 +63,18 @@ t = task.Task()
 play_source = [
     dict(
         name="Ansible Play",
-        hosts='localhost',
+        hosts='master',
         gather_facts='no',
         tasks=[
             t.install_ntp(),
-            t.set_timezone(),
-            t.publish_modules_file()
         ]
     ),
     dict(
         name="Ansible Play",
-        hosts='localhost',
+        hosts='master',
         gather_facts='no',
         tasks=[
-            t.install_ntp(),
             t.set_timezone(),
-            t.publish_modules_file()
         ]
     )
 ]
